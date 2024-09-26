@@ -48,4 +48,8 @@ type Swap struct {
 	// (0, +math.MaxFloat64] with an exponential distribution whose rate
 	// parameter (lambda) is 1 and whose mean is 1/lambda (1).
 	ExpFloat64 func() float64
+
+	// Number of integration points for numerical integration.
+	// Used by Calculate() method. Higher is more precise.
+	IntegrationPoints int
 }

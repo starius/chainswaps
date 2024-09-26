@@ -82,15 +82,15 @@ func (s *Swap) Simulate() float64 {
 }
 
 // Calibrate sets OutBlocks according to TargetPvalue and other parameters.
-func (s *Swap) Calibrate() {
+func (s *Swap) CalibrateWithSimulation() {
 	// Assign interval of incoming to 1.
 	scale := float64(s.OutInterval) / float64(s.InInterval)
 	timeReserve := float64(s.TimeReserve) / float64(s.InInterval)
 
-	max := s.InBlocks * int64(s.InInterval) / int64(s.OutInterval)
-	max += 1 // Round up.
-
 	inBlocks := s.InBlocks - s.InBlocksReserve
+
+	max := inBlocks * int64(s.InInterval) / int64(s.OutInterval)
+	max += 1 // Round up.
 
 	inSamples := make([]float64, s.Trials)
 	outSeries := make([][]float64, s.Trials)
